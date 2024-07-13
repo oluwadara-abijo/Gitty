@@ -1,0 +1,12 @@
+package com.dara.gitty.data.network
+
+import com.dara.gitty.data.network.model.RepositoriesResponseApiModel
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface SearchApi {
+
+    @GET("repositories")
+    suspend fun searchRepositories(@Query("q") searchQuery : String): RepositoriesResponseApiModel
+
+}
