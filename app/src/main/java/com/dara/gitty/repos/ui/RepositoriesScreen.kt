@@ -1,4 +1,4 @@
-package com.dara.gitty.ui.composables
+package com.dara.gitty.repos.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

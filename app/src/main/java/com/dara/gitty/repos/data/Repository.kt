@@ -1,4 +1,4 @@
-package com.dara.gitty.ui.model
+package com.dara.gitty.repos.data
 
 data class Repository(
     val name: String,

@@ -1,7 +1,7 @@
-package com.dara.gitty.data.network.utils
+package com.dara.gitty.repos
 
-import com.dara.gitty.data.network.model.RepositoryApiModel
-import com.dara.gitty.ui.model.Repository
+import com.dara.gitty.repos.data.model.RepositoryApiModel
+import com.dara.gitty.repos.data.Repository
 
 fun RepositoryApiModel.toRepository()  = Repository(
     name = fullName,

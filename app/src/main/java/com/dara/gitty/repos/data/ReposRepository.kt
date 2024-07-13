@@ -1,7 +1,7 @@
-package com.dara.gitty.data.network
+package com.dara.gitty.repos.data
 
-import com.dara.gitty.data.network.utils.toRepository
-import com.dara.gitty.ui.model.Repository
+import com.dara.gitty.data.network.SearchApi
+import com.dara.gitty.repos.toRepository
 import javax.inject.Inject
 
 class ReposRepository @Inject constructor(

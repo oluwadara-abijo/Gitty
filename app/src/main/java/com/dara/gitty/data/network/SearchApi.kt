@@ -1,6 +1,6 @@
 package com.dara.gitty.data.network
 
-import com.dara.gitty.data.network.model.RepositoriesResponseApiModel
+import com.dara.gitty.repos.data.model.RepositoriesResponseApiModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

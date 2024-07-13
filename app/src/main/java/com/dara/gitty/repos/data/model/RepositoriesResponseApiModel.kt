@@ -1,4 +1,4 @@
-package com.dara.gitty.data.network.model
+package com.dara.gitty.repos.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
