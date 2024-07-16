@@ -2,6 +2,7 @@ package com.dara.gitty.ui.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +20,6 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import com.dara.gitty.R
 import com.dara.gitty.ui.theme.Dimens.CardHeight
 import com.dara.gitty.ui.theme.Dimens.PaddingDefault
@@ -32,7 +32,10 @@ import com.dara.gitty.ui.theme.Dimens.TextSizeTitle
 import com.dara.gitty.ui.theme.manropeFamily
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navigateToUsers: () -> Unit,
+    navigateToRepos: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,6 +55,7 @@ fun HomeScreen() {
             modifier = Modifier.fillMaxWidth(),
         ) {
             MenuCard(
+                onCardClick = navigateToUsers,
                 modifier = Modifier.weight(1f),
                 backgroundColor = Color(0xFFECF5F8),
                 icon = R.drawable.ic_users_menu,
@@ -59,6 +63,7 @@ fun HomeScreen() {
             )
             Spacer(modifier = Modifier.width(PaddingDefault))
             MenuCard(
+                onCardClick = navigateToRepos,
                 modifier = Modifier.weight(1f),
                 backgroundColor = Color(0xFFF6EDF8),
                 icon = R.drawable.ic_repos_menu,
@@ -75,13 +80,15 @@ fun MenuCard(
     backgroundColor: Color,
     icon: Int,
     labelRes: Int,
+    onCardClick: () -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .height(CardHeight)
             .background(color = backgroundColor)
-            .padding(PaddingDefault),
+            .padding(PaddingDefault)
+            .clickable { onCardClick() },
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Image(
@@ -98,10 +105,4 @@ fun MenuCard(
             fontSize = TextSizeLarge
         )
     }
-}
-
-@Preview
-@Composable
-fun CardPreview() {
-    HomeScreen()
 }

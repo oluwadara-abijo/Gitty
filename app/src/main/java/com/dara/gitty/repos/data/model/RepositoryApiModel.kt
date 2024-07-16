@@ -25,7 +25,6 @@ data class RepositoryApiModel(
     val language: String?,
     @SerialName("forks_count") val forksCount: Int,
     @SerialName("open_issues_count") val openIssuesCount: Int,
-    @SerialName("master_branch") val masterBranch: String,
     @SerialName("default_branch") val defaultBranch: String,
     val score: Double,
     @SerialName("archive_url") val archiveUrl: String,
@@ -79,6 +78,7 @@ data class RepositoryApiModel(
     @SerialName("has_downloads") val hasDownloads: Boolean,
     val archived: Boolean,
     val disabled: Boolean,
+    val topics: List<String>,
     val visibility: String,
     val license: LicenseApiModel?
 )

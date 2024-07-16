@@ -10,5 +10,4 @@ data class LicenseApiModel(
     val url: String?,
     @SerialName("spdx_id") val spdxId: String,
     @SerialName("node_id") val nodeId: String,
-    @SerialName("html_url") val htmlUrl: String?
 )

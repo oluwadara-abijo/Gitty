@@ -7,10 +7,10 @@ import javax.inject.Inject
 class ReposRepository @Inject constructor(
     private val searchApi: SearchApi
 ) {
-    suspend fun searchRepositories(searchQuery: String): Result<List<Repository>> {
+    suspend fun searchRepositories(searchInput: String): Result<List<Repository>> {
         return try {
             // Get server response
-            val serverResponse = searchApi.searchRepositories(searchQuery)
+            val serverResponse = searchApi.searchRepositories(searchInput)
             // Get list of repositories from server response
             val repositoryApiModels = serverResponse.repositories
             // Map to UI model

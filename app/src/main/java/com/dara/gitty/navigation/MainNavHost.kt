@@ -9,8 +9,8 @@ import com.dara.gitty.navigation.Screen.Home
 import com.dara.gitty.navigation.Screen.Repositories
 import com.dara.gitty.navigation.Screen.UserDetail
 import com.dara.gitty.navigation.Screen.Users
-import com.dara.gitty.ui.composables.HomeScreen
 import com.dara.gitty.repos.ui.RepositoriesScreen
+import com.dara.gitty.ui.composables.HomeScreen
 import com.dara.gitty.ui.composables.UserDetailScreen
 import com.dara.gitty.ui.composables.UsersScreen
 
@@ -31,7 +31,12 @@ fun MainNavHost(
         modifier = modifier,
         startDestination = Home.route
     ) {
-        composable(Home.route) { HomeScreen() }
+        composable(Home.route) {
+            HomeScreen(
+                navigateToUsers = { navController.navigate(Users.route) },
+                navigateToRepos = { navController.navigate(Repositories.route) }
+            )
+        }
         composable(Repositories.route) { RepositoriesScreen() }
         composable(Users.route) { UsersScreen() }
         composable(UserDetail.route) { UserDetailScreen() }

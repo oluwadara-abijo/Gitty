@@ -7,4 +7,6 @@
     <string name="request_timed_out">Request timed out</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="server_error">Server error</string>
+    <string name="search_for_repositories">Search for repositories...</string>
+    <string name="search">Search</string>
 </resources>

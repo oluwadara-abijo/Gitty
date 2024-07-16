@@ -9,9 +9,20 @@ import androidx.compose.ui.unit.sp
 import com.dara.gitty.R
 
 // Set of Material typography styles to start with
+
+val manropeFamily = FontFamily(
+    Font(R.font.manrope_extra_light, FontWeight.ExtraLight),
+    Font(R.font.manrope_light, FontWeight.Light),
+    Font(R.font.manrope_regular, FontWeight.Normal),
+    Font(R.font.manrope_medium, FontWeight.Medium),
+    Font(R.font.manrope_bold, FontWeight.Bold),
+    Font(R.font.manrope_semi_bold, FontWeight.SemiBold),
+    Font(R.font.manrope_extra_bold, FontWeight.ExtraBold)
+)
+
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = manropeFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
@@ -33,15 +44,4 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
-)
-
-val manropeFamily = FontFamily(
-    Font(R.font.manrope_extra_light, FontWeight.ExtraLight),
-    Font(R.font.manrope_light, FontWeight.Light),
-    Font(R.font.manrope_regular, FontWeight.Normal),
-    Font(R.font.manrope_medium, FontWeight.Medium),
-    Font(R.font.manrope_bold, FontWeight.Bold),
-    Font(R.font.manrope_semi_bold, FontWeight.SemiBold),
-    Font(R.font.manrope_extra_bold, FontWeight.ExtraBold)
-
 )

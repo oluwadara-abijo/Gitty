@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.sp
 object Dimens {
 
     val CardHeight = 150.dp
+
     val PaddingSmall = 4.dp
     val PaddingHalf = 8.dp
     val PaddingDefault = 16.dp
