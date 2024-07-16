@@ -70,27 +70,30 @@ fun RepositoryCard(repository: Repository) {
         RowContent {
             Icon(painter = painterResource(id = R.drawable.ic_star), contentDescription = "Stars")
             Text(
-                text = repository.stars.toString(),
+                text = "${repository.stars}",
                 color = Black,
                 fontWeight = Normal,
                 modifier = Modifier.padding(start = PaddingSmall)
             )
             Spacer(modifier = Modifier.width(PaddingHalf))
-            Image(
-                painter = painterResource(id = R.drawable.ic_lang),
-                contentDescription = "Language"
-            )
-            Text(
-                text = repository.language.toString(),
-                color = Black,
-                fontWeight = Normal,
-                modifier = Modifier.padding(start = PaddingSmall)
-            )
+
+            if (!repository.language.isNullOrEmpty()) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_lang),
+                    contentDescription = "Language"
+                )
+                Text(
+                    text = repository.language,
+                    color = Black,
+                    fontWeight = Normal,
+                    modifier = Modifier.padding(start = PaddingSmall)
+                )
+            }
         }
 
         Text(
             modifier = Modifier.padding(top = PaddingLarge, start = PaddingHalf, end = PaddingHalf),
-            text = repository.description.toString(),
+            text = repository.description ?: "",
             color = Black,
             fontWeight = Normal,
             maxLines = 2,
