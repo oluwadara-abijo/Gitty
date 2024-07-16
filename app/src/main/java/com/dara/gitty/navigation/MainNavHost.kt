@@ -33,8 +33,8 @@ fun MainNavHost(
     ) {
         composable(Home.route) {
             HomeScreen(
-                navigateToUsers = { navController.navigate(Users.route) },
-                navigateToRepos = { navController.navigate(Repositories.route) }
+                navigateToUsers = { navController.navigateBottomTab(Users.route) },
+                navigateToRepos = { navController.navigateBottomTab(Repositories.route) }
             )
         }
         composable(Repositories.route) { RepositoriesScreen() }

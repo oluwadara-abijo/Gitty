@@ -21,7 +21,7 @@ import com.dara.gitty.ui.theme.Dimens.PaddingHalf
 @Composable
 fun BottomNavBar(
     currentDestination: NavDestination?,
-    onBottomTabSelected: (BottomTab) -> Unit,
+    onBottomTabSelected: (String) -> Unit,
 ) {
     Surface(shadowElevation = PaddingHalf) {
         NavigationBar(
@@ -38,7 +38,7 @@ fun BottomNavBar(
                         unselectedIconColor = Black
                     ),
                     selected = selected,
-                    onClick = { onBottomTabSelected(tab) },
+                    onClick = { onBottomTabSelected(tab.startDestination) },
                     label = { Text(text = stringResource(id = tab.title)) },
                     icon = {
                         Icon(
