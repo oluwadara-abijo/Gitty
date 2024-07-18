@@ -8,4 +8,6 @@ data class Repository(
     val stars: Int,
     val language: String?,
     val topics: List<String>,
+    val visibility:String,
+    val updatedAt: String,
 )

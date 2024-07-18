@@ -15,4 +15,6 @@
     <string name="search_for_users_empty">Search GitHub for users</string>
     <string name="search_users_no_result">We’ve searched the ends of the earth and we’ve not found this user, please try again</string>
     <string name="profile_picture">Profile picture</string>
+    <string name="back">Back</string>
+    <string name="followers">Followers</string>
 </resources>

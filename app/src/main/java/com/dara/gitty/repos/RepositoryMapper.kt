@@ -11,4 +11,6 @@ fun RepositoryApiModel.toRepository()  = Repository(
     stars = stargazersCount,
     language = language,
     topics = topics,
+    visibility = visibility,
+    updatedAt = updatedAt,
 )

@@ -11,7 +11,7 @@ import com.dara.gitty.navigation.Screen.UserDetail
 import com.dara.gitty.navigation.Screen.Users
 import com.dara.gitty.repos.ui.RepositoriesScreen
 import com.dara.gitty.ui.composables.HomeScreen
-import com.dara.gitty.ui.composables.UserDetailScreen
+import com.dara.users.ui.composables.UserDetailScreen
 import com.dara.users.ui.composables.UsersScreen
 
 
