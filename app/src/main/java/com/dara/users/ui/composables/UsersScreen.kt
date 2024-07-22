@@ -33,13 +33,19 @@ import com.dara.users.ui.UsersViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun UsersScreen() {
-    UsersScreenContent(viewModel = hiltViewModel())
+fun UsersScreen(
+    navigateToUserDetail: (String) -> Unit
+) {
+    UsersScreenContent(
+        viewModel = hiltViewModel(),
+        navigateToUserDetail = navigateToUserDetail
+    )
 }
 
 @Composable
 fun UsersScreenContent(
     viewModel: UsersViewModel,
+    navigateToUserDetail: (String) -> Unit
 ) {
     val uiState by viewModel.uiState
     val coroutineScope = rememberCoroutineScope()
@@ -99,7 +105,10 @@ fun UsersScreenContent(
 
             LazyColumn {
                 items(uiState.users) { item ->
-                    UserCard(user = item)
+                    UserCard(
+                        user = item,
+                        navigateToUserDetail = navigateToUserDetail
+                    )
                 }
             }
         }

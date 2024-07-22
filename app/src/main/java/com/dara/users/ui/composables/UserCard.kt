@@ -1,5 +1,6 @@
 package com.dara.users.ui.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,17 +25,22 @@ import com.dara.gitty.ui.theme.Dimens.PaddingSmall
 import com.dara.users.data.model.User
 
 @Composable
-fun UserCard(user: User) {
+fun UserCard(
+    user: User,
+    navigateToUserDetail: (String) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = PaddingHalf),
+            .padding(bottom = PaddingHalf)
+            .clickable { navigateToUserDetail(user.name) },
         elevation = CardDefaults.cardElevation(defaultElevation = CardElevation),
         shape = RoundedCornerShape(PaddingSmall),
         colors = CardDefaults.cardColors(containerColor = White),
     ) {
         Row(
-            modifier = Modifier.padding(PaddingDefault),
+            modifier = Modifier
+                .padding(PaddingDefault),
             verticalAlignment = CenterVertically
         ) {
             CircleImage(url = user.avatarUrl, size = PaddingLarge)

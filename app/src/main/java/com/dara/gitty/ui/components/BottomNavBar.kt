@@ -28,24 +28,26 @@ fun BottomNavBar(
             containerColor = White,
         ) {
             BOTTOM_TABS.forEach { tab ->
-                val selected = currentDestination?.route == tab.startDestination
-                NavigationBarItem(
-                    colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = White,
-                        unselectedTextColor = Black,
-                        selectedTextColor = Black,
-                        selectedIconColor = Black,
-                        unselectedIconColor = Black
-                    ),
-                    selected = selected,
-                    onClick = { onBottomTabSelected(tab.startDestination) },
-                    label = { Text(text = stringResource(id = tab.title)) },
-                    icon = {
-                        Icon(
-                            painter = painterResource(id = if (selected) tab.selectedIcon else tab.unselectedIcon),
-                            contentDescription = null,
-                        )
-                    })
+                val selected = currentDestination?.route?.contains(tab.startDestination)
+                if (selected != null) {
+                    NavigationBarItem(
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = White,
+                            unselectedTextColor = Black,
+                            selectedTextColor = Black,
+                            selectedIconColor = Black,
+                            unselectedIconColor = Black
+                        ),
+                        selected = selected,
+                        onClick = { onBottomTabSelected(tab.startDestination) },
+                        label = { Text(text = stringResource(id = tab.title)) },
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = if (selected) tab.selectedIcon else tab.unselectedIcon),
+                                contentDescription = null,
+                            )
+                        })
+                }
             }
         }
     }

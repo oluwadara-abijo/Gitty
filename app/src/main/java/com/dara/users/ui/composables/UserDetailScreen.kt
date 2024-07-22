@@ -2,6 +2,7 @@ package com.dara.users.ui.composables
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,8 +13,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -21,105 +29,180 @@ import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight.Companion.Normal
+import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dara.gitty.R
 import com.dara.gitty.ui.composables.CircleImage
 import com.dara.gitty.ui.theme.DarkGreyText
-import com.dara.gitty.ui.theme.Dimens
+import com.dara.gitty.ui.theme.Dimens.BigAvatar
 import com.dara.gitty.ui.theme.Dimens.PaddingDefault
 import com.dara.gitty.ui.theme.Dimens.PaddingDouble
 import com.dara.gitty.ui.theme.Dimens.PaddingHalf
 import com.dara.gitty.ui.theme.Dimens.PaddingLarge
 import com.dara.gitty.ui.theme.Dimens.PaddingSmall
+import com.dara.gitty.ui.theme.Dimens.TextSizeDefault
+import com.dara.gitty.ui.theme.Dimens.TextSizeExtraSmall
+import com.dara.gitty.ui.theme.Dimens.TextSizeLarge
+import com.dara.gitty.ui.theme.Dimens.TextSizeSmall
 import com.dara.gitty.ui.theme.SliderColor
+import com.dara.users.ui.UserDetailViewModel
+import kotlinx.coroutines.launch
 
 @Composable
-fun UserDetailScreen() {
+fun UserDetailScreen(
+    navigateBack: () -> Unit
+) {
+    UserDetailScreenContent(
+        viewModel = hiltViewModel(),
+        navigateBack = navigateBack
+    )
 }
 
 @Composable
-fun UserDetailScreenContent() {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(color = White)
-            .padding(vertical = PaddingDouble, horizontal = PaddingLarge)
-    ) {
-        Row(verticalAlignment = CenterVertically) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_back),
-                contentDescription = stringResource(R.string.back)
-            )
-            Spacer(modifier = Modifier.width(PaddingLarge))
-            Text(
-                text = stringResource(id = R.string.users),
-                fontWeight = FontWeight.SemiBold,
-                fontSize = Dimens.TextSizeDefault
-            )
-        }
-        Spacer(modifier = Modifier.height(PaddingLarge))
-        Row {
-            CircleImage(url = "", size = Dimens.PaddingExtraLarge)
-            Spacer(modifier = Modifier.width(PaddingLarge))
-            Column {
-                Text(
-                    text = "Paige Brown",
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = Dimens.TextSizeLarge
-                )
-                Text(
-                    text = "DynamicWebPaige",
-                    fontWeight = FontWeight.Normal,
-                    fontSize = Dimens.TextSizeLarge
-                )
+fun UserDetailScreenContent(
+    viewModel: UserDetailViewModel,
+    navigateBack: () -> Unit
+) {
+    val uiState by viewModel.uiState
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { paddingValues ->
+        if (!uiState.errorMessage.isNullOrEmpty()) {
+            LaunchedEffect(key1 = uiState.errorMessage) {
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar(uiState.errorMessage!!)
+                }
             }
         }
-        Spacer(modifier = Modifier.height(PaddingLarge))
-        Text("This is a random bio, which will be replace with actual content")
-        Spacer(modifier = Modifier.height(PaddingLarge))
-        Row(verticalAlignment = CenterVertically) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_location),
-                contentDescription = stringResource(R.string.back)
-            )
-            Spacer(modifier = Modifier.width(PaddingSmall))
-            Text(text = "Lagos, Nigeria", color = DarkGreyText)
-            Spacer(modifier = Modifier.width(PaddingDefault))
-            Icon(
-                painter = painterResource(id = R.drawable.ic_link),
-                contentDescription = stringResource(R.string.back)
-            )
-            Spacer(modifier = Modifier.width(PaddingSmall))
-            Text(text = "http://www.paige.com")
-        }
-        Spacer(modifier = Modifier.height(PaddingHalf))
-        Row(verticalAlignment = CenterVertically) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_followers),
-                contentDescription = stringResource(R.string.followers)
-            )
-            Spacer(modifier = Modifier.width(PaddingSmall))
-            Text(text = "400 followers  .", color = DarkGreyText)
-            Spacer(modifier = Modifier.width(PaddingHalf))
-            Text(text = "30 following", color = DarkGreyText)
-        }
-        Spacer(modifier = Modifier.height(PaddingLarge))
-        Row {
-            Text(text = "Repositories")
-            Spacer(modifier = Modifier.width(PaddingHalf))
-            Text(
-                text = "200",
-                Modifier
-                    .background(color = SliderColor, shape = CircleShape)
-                    .padding(horizontal = 6.dp)
-            )
-        }
-        Spacer(modifier = Modifier.height(PaddingSmall))
-        TwoColorLine()
+        Column(
+            Modifier
+                .fillMaxSize()
+                .background(color = White)
+                .padding(paddingValues)
+                .padding(vertical = PaddingDouble, horizontal = PaddingLarge)
+        ) {
+            if (uiState.userInfo != null) {
+                val userInfo = uiState.userInfo!!
 
-        Spacer(modifier = Modifier.height(PaddingSmall))
+                Row(verticalAlignment = CenterVertically) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_back),
+                        contentDescription = stringResource(R.string.back),
+                        modifier = Modifier.clickable { navigateBack() }
+                    )
+                    Spacer(modifier = Modifier.width(PaddingLarge))
+                    Text(
+                        text = stringResource(id = R.string.users),
+                        fontWeight = SemiBold,
+                        fontSize = TextSizeDefault
+                    )
+                }
+                Spacer(modifier = Modifier.height(PaddingLarge))
+                Row {
+                    CircleImage(
+                        url = userInfo.avatarUrl,
+                        size = BigAvatar
+                    )
+                    Spacer(modifier = Modifier.width(PaddingDefault))
+                    Column {
+                        if (userInfo.fullName.isNotEmpty()) {
+                            Text(
+                                text = userInfo.fullName,
+                                fontWeight = SemiBold,
+                                fontSize = TextSizeLarge
+                            )
+                        }
+                        Text(
+                            text = userInfo.username,
+                            fontWeight = Normal,
+                            fontSize = TextSizeLarge
+                        )
+                    }
+                }
+                if (userInfo.bio.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(PaddingLarge))
+                    Text(
+                        text = userInfo.bio,
+                        fontSize = TextSizeSmall
+                    )
+                }
+                Row(
+                    verticalAlignment = CenterVertically,
+                    modifier = Modifier.padding(top = PaddingLarge)
+                ) {
+                    if (userInfo.location.isNotEmpty()) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_location),
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.width(PaddingSmall))
+                        Text(
+                            text = userInfo.location,
+                            color = DarkGreyText,
+                            fontSize = TextSizeExtraSmall
+                        )
+                    }
+                    if (userInfo.blog.isNotEmpty()) {
+                        Spacer(modifier = Modifier.width(PaddingDefault))
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_link),
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.width(PaddingSmall))
+                        Text(
+                            text = userInfo.blog,
+                            fontSize = TextSizeExtraSmall,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+                Row(
+                    verticalAlignment = CenterVertically,
+                    modifier = Modifier.padding(top = PaddingHalf)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_followers),
+                        contentDescription = stringResource(R.string.followers)
+                    )
+                    Spacer(modifier = Modifier.width(PaddingSmall))
+                    Text(
+                        text = "${userInfo.followers} followers  .",
+                        fontSize = TextSizeExtraSmall,
+                        color = DarkGreyText
+                    )
+                    Spacer(modifier = Modifier.width(PaddingHalf))
+                    Text(
+                        text = "${userInfo.following} following",
+                        fontSize = TextSizeExtraSmall,
+                        color = DarkGreyText
+                    )
+                }
+                Row(modifier = Modifier.padding(top = PaddingLarge)) {
+                    Text(
+                        text = stringResource(id = R.string.repositories),
+                        fontSize = TextSizeExtraSmall,
+                    )
+                    Spacer(modifier = Modifier.width(PaddingHalf))
+                    Text(
+                        text = userInfo.reposCount,
+                        fontSize = TextSizeExtraSmall,
+                        modifier = Modifier
+                            .background(color = SliderColor, shape = CircleShape)
+                            .padding(horizontal = PaddingHalf)
+                    )
+                }
+                Spacer(modifier = Modifier.height(PaddingSmall))
+                TwoColorLine()
+                Spacer(modifier = Modifier.height(PaddingSmall))
+            }
+        }
     }
 }
 
@@ -144,10 +227,4 @@ fun TwoColorLine() {
             strokeWidth = size.height
         )
     }
-}
-
-@Preview
-@Composable
-fun UserDetailScreenPreview() {
-    UserDetailScreenContent()
 }

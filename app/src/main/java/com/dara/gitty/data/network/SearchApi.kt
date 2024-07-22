@@ -1,9 +1,13 @@
 package com.dara.gitty.data.network
 
 import com.dara.gitty.repos.data.model.RepositoriesResponseApiModel
+import com.dara.gitty.repos.data.model.RepositoryApiModel
+import com.dara.users.data.model.UserInfoApiModel
+import com.dara.users.data.model.UserRepoApiModel
 import com.dara.users.data.model.UsersResponseApiModel
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface SearchApi {
 
@@ -12,5 +16,11 @@ interface SearchApi {
 
     @GET("users")
     suspend fun searchUsers(@Query("q") searchInput: String): UsersResponseApiModel
+
+    @GET
+    suspend fun fetchUserInfo(@Url url: String) : UserInfoApiModel
+
+    @GET
+    suspend fun fetchUserRepos(@Url url: String) : List<UserRepoApiModel>
 
 }

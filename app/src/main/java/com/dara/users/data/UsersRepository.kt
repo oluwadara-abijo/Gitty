@@ -1,7 +1,10 @@
 package com.dara.users.data
 
 import com.dara.gitty.data.network.SearchApi
+import com.dara.gitty.repos.data.Repository
+import com.dara.gitty.repos.toRepository
 import com.dara.users.data.model.User
+import com.dara.users.data.model.UserInfo
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(
@@ -16,6 +19,30 @@ class UsersRepository @Inject constructor(
             // Map to UI model
             val users = userApiModels.map { it.toUser() }
             Result.success(users)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getUserInfo(url: String): Result<UserInfo> {
+        return try {
+            // Get server response
+            val apiModel = searchApi.fetchUserInfo(url)
+            // Map to UI model
+            val userInfo = apiModel.toUserInfo()
+            Result.success(userInfo)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getUserRepos(url: String): Result<List<Repository>> {
+        return try {
+            // Get server response
+            val apiModel = searchApi.fetchUserRepos(url)
+            // Map to UI model
+            val userInfo = apiModel.map { it.toRepository() }
+            Result.success(userInfo)
         } catch (e: Exception) {
             Result.failure(e)
         }
