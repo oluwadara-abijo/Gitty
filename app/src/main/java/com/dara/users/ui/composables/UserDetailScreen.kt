@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -22,6 +24,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -35,6 +38,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dara.gitty.R
+import com.dara.gitty.repos.ui.RepositoryCard
+import com.dara.gitty.ui.components.EmptyStateWidget
+import com.dara.gitty.ui.components.ProgressBar
 import com.dara.gitty.ui.composables.CircleImage
 import com.dara.gitty.ui.theme.DarkGreyText
 import com.dara.gitty.ui.theme.Dimens.BigAvatar
@@ -201,6 +207,21 @@ fun UserDetailScreenContent(
                 Spacer(modifier = Modifier.height(PaddingSmall))
                 TwoColorLine()
                 Spacer(modifier = Modifier.height(PaddingSmall))
+                LazyColumn {
+                    items(uiState.repos) { item ->
+                        RepositoryCard(repository = item, isForUserDetails = true)
+                    }
+                }
+                ProgressBar(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    loading = uiState.isLoading
+                )
+                if (uiState.hasNoRepos) {
+                    EmptyStateWidget(
+                        title = stringResource(R.string.no_user_repos),
+                        image = R.drawable.empty_repos
+                    )
+                }
             }
         }
     }

@@ -26,7 +26,7 @@ data class RepositoryApiModel(
     @SerialName("forks_count") val forksCount: Int,
     @SerialName("open_issues_count") val openIssuesCount: Int,
     @SerialName("default_branch") val defaultBranch: String,
-    val score: Double,
+    val score: Double? = null,
     @SerialName("archive_url") val archiveUrl: String,
     @SerialName("assignees_url") val assigneesUrl: String,
     @SerialName("blobs_url") val blobsUrl: String,

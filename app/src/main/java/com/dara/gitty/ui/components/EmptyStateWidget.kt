@@ -1,5 +1,6 @@
 package com.dara.gitty.ui.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +21,8 @@ import com.dara.gitty.ui.theme.Dimens.PaddingExtraLarge
 
 @Composable
 fun EmptyStateWidget(
-    title: String
+    title: String,
+    @DrawableRes image: Int = R.drawable.ic_search_empty,
 ) {
     Column(
         modifier = Modifier
@@ -30,7 +32,7 @@ fun EmptyStateWidget(
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_search_empty),
+            painter = painterResource(id = image),
             contentDescription = stringResource(id = R.string.search)
         )
         Spacer(modifier = Modifier.height(PaddingDouble))

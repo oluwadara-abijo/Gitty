@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Normal
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dara.gitty.R
@@ -37,6 +37,8 @@ import com.dara.gitty.ui.theme.Dimens.PaddingDefault
 import com.dara.gitty.ui.theme.Dimens.PaddingHalf
 import com.dara.gitty.ui.theme.Dimens.PaddingLarge
 import com.dara.gitty.ui.theme.Dimens.PaddingSmall
+import com.dara.gitty.ui.theme.Dimens.TextSizeExtraSmall
+import com.dara.gitty.ui.theme.Dimens.TextSizeSmall
 import com.dara.gitty.ui.theme.GreyBorder
 import com.dara.gitty.ui.theme.PurpleText
 
@@ -54,21 +56,34 @@ fun RepositoryCard(
         colors = CardDefaults.cardColors(containerColor = White),
     ) {
         RowContent {
-            CircleImage(url = repository.imageUrl, size = PaddingLarge)
-            Text(
-                text = "${repository.owner}/",
-                modifier = Modifier.padding(start = PaddingHalf),
-                color = PurpleText,
-                fontWeight = Normal
-            )
-            Text(text = repository.name, color = Black, fontWeight = SemiBold, maxLines = 1)
+            Row(Modifier.fillMaxWidth(0.8f)) {
+                CircleImage(
+                    url = repository.imageUrl,
+                    size = PaddingLarge
+                )
+                Text(
+                    text = "${repository.owner}/",
+                    modifier = Modifier.padding(start = PaddingHalf),
+                    color = PurpleText,
+                    fontWeight = Normal,
+                    fontSize = TextSizeSmall
+                )
+                Text(
+                    text = repository.name,
+                    color = Black,
+                    fontWeight = SemiBold,
+                    maxLines = 1,
+                    fontSize = TextSizeSmall
+                )
+            }
             if (isForUserDetails == true) {
-                Spacer(modifier = Modifier.width(PaddingDefault))
                 Text(
                     text = repository.visibility,
+                    fontSize = TextSizeExtraSmall,
                     modifier = Modifier
-                        .border(BorderStroke(0.5.dp, GreyBorder), RoundedCornerShape(PaddingHalf))
                         .padding(horizontal = PaddingHalf, vertical = PaddingSmall)
+                        .border(BorderStroke(0.5.dp, GreyBorder), RoundedCornerShape(PaddingHalf))
+                        .padding(horizontal = PaddingHalf)
                 )
             }
         }
@@ -79,6 +94,7 @@ fun RepositoryCard(
                 text = "${repository.stars}",
                 color = Black,
                 fontWeight = Normal,
+                fontSize = TextSizeExtraSmall,
                 modifier = Modifier.padding(start = PaddingSmall)
             )
             Spacer(modifier = Modifier.width(PaddingHalf))
@@ -92,26 +108,34 @@ fun RepositoryCard(
                     text = repository.language,
                     color = Black,
                     fontWeight = Normal,
+                    fontSize = TextSizeExtraSmall,
                     modifier = Modifier.padding(start = PaddingSmall)
                 )
             }
         }
 
-        Text(
-            modifier = Modifier.padding(top = PaddingLarge, start = PaddingHalf, end = PaddingHalf),
-            text = repository.description ?: "",
-            color = Black,
-            fontWeight = Normal,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
-
+        if (!repository.description.isNullOrEmpty()) {
+            Text(
+                modifier = Modifier.padding(
+                    top = PaddingLarge,
+                    start = PaddingHalf,
+                    end = PaddingHalf
+                ),
+                text = repository.description,
+                color = Black,
+                fontWeight = Normal,
+                fontSize = TextSizeExtraSmall,
+                maxLines = 2,
+                overflow = Ellipsis
+            )
+        }
         Spacer(modifier = Modifier.height(PaddingDefault))
 
         if (isForUserDetails == true) {
             Text(
                 text = "Updated ${repository.updatedAt}",
                 color = DarkGreyText,
+                fontSize = TextSizeExtraSmall,
                 modifier = Modifier.padding(
                     start = PaddingHalf,
                     end = PaddingHalf,
@@ -129,8 +153,9 @@ fun RepositoryCard(
                         text = topic,
                         color = BlueText,
                         fontWeight = Normal,
+                        fontSize = TextSizeExtraSmall,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = Ellipsis
                     )
                 }
             }
@@ -157,8 +182,8 @@ fun RowContent(
 fun RepositoryCardPreview() {
     RepositoryCard(
         repository = Repository(
-            "Dara",
-            "Wubba",
+            "DaraAbijo",
+            "Wubbaforbeginnerspartoneoftwentyhvvhhvhk",
             "",
             "Description",
             5,
@@ -166,6 +191,6 @@ fun RepositoryCardPreview() {
             listOf("Topic1", "Topic2"),
             "Public",
             "4 days ago"
-        ), isForUserDetails = false
+        ), isForUserDetails = true
     )
 }

@@ -29,7 +29,7 @@ class UserDetailViewModel @Inject constructor(
     }
 
     private fun getUserInfo() {
-        updateState(isLoading = false)
+        updateState(isLoading = true)
         viewModelScope.launch {
             val userInfoResult = repository.getUserInfo(buildUrl(username))
             userInfoResult.fold(
@@ -51,10 +51,12 @@ class UserDetailViewModel @Inject constructor(
 
     private fun getUserRepos() {
         if (uiState.value.userInfo != null) {
+            updateState(isLoading = true)
             viewModelScope.launch {
                 val result = repository.getUserRepos(uiState.value.userInfo!!.reposUrl)
                 result.fold(
                     onSuccess = { repos ->
+                        updateState(isLoading = false)
                         if (repos.isEmpty()) {
                             updateState(hasNoRepos = true)
                         } else {
