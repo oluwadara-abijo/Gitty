@@ -56,7 +56,8 @@ fun SearchBar(
                     focusManager.clearFocus()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = ButtonBg),
-                shape = RoundedCornerShape(PaddingHalf)
+                shape = RoundedCornerShape(PaddingHalf),
+                enabled = searchInput.isNotEmpty()
             ) {
                 Text(text = stringResource(R.string.search))
             }
