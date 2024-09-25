@@ -21,7 +21,7 @@ class UsersViewModel @Inject constructor(
     val uiState: State<UsersUiState> = _uiState
 
     fun searchUsers(searchInput: String) {
-        updateState(isEmptyState = false, isLoading = true)
+        updateState(isEmptyState = false, isLoading = true, searchInput = searchInput)
 
         viewModelScope.launch {
             val result = repository.searchUsers(searchInput)
@@ -43,20 +43,26 @@ class UsersViewModel @Inject constructor(
         }
     }
 
+    fun updateSearchInput(searchInput: String) {
+        updateState(searchInput = searchInput)
+    }
+
     // Updates the current state of the UI
     private fun updateState(
         users: List<User>? = null,
         isEmptyState: Boolean? = null,
         isNoResult: Boolean? = null,
         isLoading: Boolean? = null,
-        errorMessage: String? = null
+        errorMessage: String? = null,
+        searchInput: String? = null
     ) {
         _uiState.value = _uiState.value.copy(
             users = users ?: _uiState.value.users,
             isEmptyState = isEmptyState ?: _uiState.value.isEmptyState,
             isNoResult = isNoResult ?: _uiState.value.isNoResult,
             isLoading = isLoading ?: _uiState.value.isLoading,
-            errorMessage = errorMessage ?: _uiState.value.errorMessage
+            errorMessage = errorMessage ?: _uiState.value.errorMessage,
+            searchInput = searchInput ?: _uiState.value.searchInput
         )
     }
 }

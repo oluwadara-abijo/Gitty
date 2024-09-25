@@ -77,6 +77,8 @@ fun ReposScreenContent(
 
             SearchBar(
                 hint = stringResource(R.string.search_for_repositories),
+                searchInput = uiState.searchInput,
+                onSearchInputChanged = { searchInput -> viewModel.updateSearchInput(searchInput) },
                 onSearchClicked = { searchInput -> viewModel.searchRepos(searchInput) }
             )
 

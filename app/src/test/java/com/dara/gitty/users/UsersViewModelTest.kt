@@ -90,4 +90,16 @@ class UsersViewModelTest {
         assertEquals(viewModel.uiState.value.isLoading, false)
     }
 
+    @Test
+    fun `given search input changes, ui state updates`(){
+        // Given
+        val searchInput = "android"
+
+        // When
+        viewModel.updateSearchInput(searchInput)
+
+        // Then
+        assertEquals(viewModel.uiState.value.searchInput, searchInput)
+    }
+
 }

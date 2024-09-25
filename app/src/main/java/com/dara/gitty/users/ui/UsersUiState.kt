@@ -7,5 +7,6 @@ data class UsersUiState(
     val isEmptyState: Boolean = true,
     val isNoResult: Boolean = false,
     val isLoading: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val searchInput: String = "",
 )

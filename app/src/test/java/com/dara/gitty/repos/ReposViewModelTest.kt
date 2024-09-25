@@ -7,6 +7,7 @@ import com.dara.gitty.repos.ui.ReposViewModel
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -88,6 +89,18 @@ class ReposViewModelTest {
         // Then
         assertEquals(viewModel.uiState.value.errorMessage, errorMessage)
         assertEquals(viewModel.uiState.value.isLoading, false)
+    }
+
+    @Test
+    fun `given search input changes, ui state updates`(){
+        // Given
+        val searchInput = "android"
+
+        // When
+        viewModel.updateSearchInput(searchInput)
+
+        // Then
+        assertEquals(viewModel.uiState.value.searchInput, searchInput)
     }
 
 }

@@ -83,6 +83,8 @@ fun UsersScreenContent(
 
             SearchBar(
                 hint = stringResource(R.string.search_for_users),
+                searchInput = uiState.searchInput,
+                onSearchInputChanged = { searchInput -> viewModel.updateSearchInput(searchInput) },
                 onSearchClicked = { searchInput -> viewModel.searchUsers(searchInput) }
             )
 
