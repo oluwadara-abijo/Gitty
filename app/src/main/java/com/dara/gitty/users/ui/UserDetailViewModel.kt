@@ -1,4 +1,4 @@
-package com.dara.users.ui
+package com.dara.gitty.users.ui
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dara.gitty.data.network.utils.ErrorHandler
 import com.dara.gitty.repos.data.Repository
-import com.dara.users.data.UsersRepository
-import com.dara.users.data.model.UserInfo
+import com.dara.gitty.users.data.UsersRepository
+import com.dara.gitty.users.data.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

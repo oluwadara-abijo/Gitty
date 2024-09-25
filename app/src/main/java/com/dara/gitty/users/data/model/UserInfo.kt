@@ -1,4 +1,4 @@
-package com.dara.users.data.model
+package com.dara.gitty.users.data.model
 
 data class UserInfo(
     val avatarUrl: String,

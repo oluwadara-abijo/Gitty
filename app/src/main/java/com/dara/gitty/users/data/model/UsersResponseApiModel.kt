@@ -1,4 +1,4 @@
-package com.dara.users.data.model
+package com.dara.gitty.users.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

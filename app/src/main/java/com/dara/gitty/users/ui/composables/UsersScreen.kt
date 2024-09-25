@@ -1,4 +1,4 @@
-package com.dara.users.ui.composables
+package com.dara.gitty.users.ui.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -29,7 +29,7 @@ import com.dara.gitty.ui.components.ProgressBar
 import com.dara.gitty.ui.components.SearchBar
 import com.dara.gitty.ui.theme.Dimens
 import com.dara.gitty.ui.theme.manropeFamily
-import com.dara.users.ui.UsersViewModel
+import com.dara.gitty.users.ui.UsersViewModel
 import kotlinx.coroutines.launch
 
 @Composable

@@ -1,7 +1,7 @@
-package com.dara.users.ui
+package com.dara.gitty.users.ui
 
 import com.dara.gitty.repos.data.Repository
-import com.dara.users.data.model.UserInfo
+import com.dara.gitty.users.data.model.UserInfo
 
 data class UserDetailUiState(
     val userInfo: UserInfo? = null,

@@ -1,10 +1,10 @@
-package com.dara.users.data
+package com.dara.gitty.users.data
 
 import com.dara.gitty.data.network.SearchApi
 import com.dara.gitty.repos.data.Repository
 import com.dara.gitty.repos.toRepository
-import com.dara.users.data.model.User
-import com.dara.users.data.model.UserInfo
+import com.dara.gitty.users.data.model.User
+import com.dara.gitty.users.data.model.UserInfo
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(

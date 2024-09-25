@@ -1,9 +1,9 @@
-package com.dara.users.data
+package com.dara.gitty.users.data
 
-import com.dara.users.data.model.User
-import com.dara.users.data.model.UserApiModel
-import com.dara.users.data.model.UserInfo
-import com.dara.users.data.model.UserInfoApiModel
+import com.dara.gitty.users.data.model.User
+import com.dara.gitty.users.data.model.UserApiModel
+import com.dara.gitty.users.data.model.UserInfo
+import com.dara.gitty.users.data.model.UserInfoApiModel
 
 fun UserApiModel.toUser() = User(
     name = login,

@@ -1,4 +1,4 @@
-package com.dara.users.ui.composables
+package com.dara.gitty.users.ui.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -22,7 +22,7 @@ import com.dara.gitty.ui.theme.Dimens.PaddingDefault
 import com.dara.gitty.ui.theme.Dimens.PaddingHalf
 import com.dara.gitty.ui.theme.Dimens.PaddingLarge
 import com.dara.gitty.ui.theme.Dimens.PaddingSmall
-import com.dara.users.data.model.User
+import com.dara.gitty.users.data.model.User
 
 @Composable
 fun UserCard(

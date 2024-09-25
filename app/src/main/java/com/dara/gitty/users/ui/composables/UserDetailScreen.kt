@@ -1,4 +1,4 @@
-package com.dara.users.ui.composables
+package com.dara.gitty.users.ui.composables
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -54,7 +54,7 @@ import com.dara.gitty.ui.theme.Dimens.TextSizeExtraSmall
 import com.dara.gitty.ui.theme.Dimens.TextSizeLarge
 import com.dara.gitty.ui.theme.Dimens.TextSizeSmall
 import com.dara.gitty.ui.theme.SliderColor
-import com.dara.users.ui.UserDetailViewModel
+import com.dara.gitty.users.ui.UserDetailViewModel
 import kotlinx.coroutines.launch
 
 @Composable
