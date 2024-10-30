@@ -1,5 +1,7 @@
 package com.dara.gitty.repos.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,7 +43,9 @@ import com.dara.gitty.ui.theme.Dimens.TextSizeExtraSmall
 import com.dara.gitty.ui.theme.Dimens.TextSizeSmall
 import com.dara.gitty.ui.theme.GreyBorder
 import com.dara.gitty.ui.theme.PurpleText
+import com.dara.gitty.utils.toTimeAgo
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RepositoryCard(
     repository: Repository,
@@ -133,7 +137,7 @@ fun RepositoryCard(
 
         if (isForUserDetails == true) {
             Text(
-                text = "Updated ${repository.updatedAt}",
+                text = "Updated ${repository.updatedAt.toTimeAgo()}",
                 color = DarkGreyText,
                 fontSize = TextSizeExtraSmall,
                 modifier = Modifier.padding(
